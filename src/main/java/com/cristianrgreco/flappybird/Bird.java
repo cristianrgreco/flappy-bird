@@ -2,10 +2,12 @@ package com.cristianrgreco.flappybird;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 import static com.cristianrgreco.flappybird.Panel.WINDOW_HEIGHT;
+import static javax.swing.KeyStroke.getKeyStroke;
 
-class Bird implements Model {
+class Bird implements Model, KeyBindings {
 
     private static final int WIDTH = 25;
     private static final int HEIGHT = 25;
@@ -14,7 +16,6 @@ class Bird implements Model {
     private double x = 50;
     private double y = (WINDOW_HEIGHT / 3.0) - HEIGHT;
     private double velocity = 0;
-
     private boolean hasCrashed = false;
 
 
@@ -23,6 +24,7 @@ class Bird implements Model {
         g.setColor(Color.RED);
         g.fill(new Rectangle2D.Double(x, y, WIDTH, HEIGHT));
     }
+
 
     @Override
     public void update() {
@@ -45,4 +47,13 @@ class Bird implements Model {
         return y >= 0 && y <= WINDOW_HEIGHT - HEIGHT;
     }
 
+
+    @Override
+    public Iterable<KeyBinding> getKeyBindings() {
+        return List.of(new KeyBinding(getKeyStroke(' '), "JUMP", e -> jump()));
+    }
+
+    private void jump() {
+        System.out.println("JUMP");
+    }
 }
