@@ -4,8 +4,8 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.cristianrgreco.flappybird.Panel.WINDOW_HEIGHT;
-import static com.cristianrgreco.flappybird.Panel.WINDOW_WIDTH;
+import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
+import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
 
 class Pipe implements Model {
 

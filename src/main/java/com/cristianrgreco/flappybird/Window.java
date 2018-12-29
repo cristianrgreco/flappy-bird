@@ -4,6 +4,10 @@ import javax.swing.*;
 
 class Window extends JFrame {
 
+    static final int WINDOW_WIDTH = 375;
+    static final int WINDOW_HEIGHT = 667;
+
+
     void display() {
         pack();
         setTitle("Flappy Bird");

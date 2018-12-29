@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.util.List;
 
-import static com.cristianrgreco.flappybird.Panel.WINDOW_HEIGHT;
+import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
 import static javax.swing.KeyStroke.getKeyStroke;
 
 class Bird implements Model, KeyBindings {

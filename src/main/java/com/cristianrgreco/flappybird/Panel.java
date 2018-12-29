@@ -3,10 +3,10 @@ package com.cristianrgreco.flappybird;
 import javax.swing.*;
 import java.awt.*;
 
-class Panel extends JPanel {
+import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
+import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
 
-    static final int WINDOW_WIDTH = 375;
-    static final int WINDOW_HEIGHT = 667;
+class Panel extends JPanel {
 
     private Bird bird;
     private Pipes pipes;
