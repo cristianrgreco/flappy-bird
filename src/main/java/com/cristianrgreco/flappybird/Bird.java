@@ -11,12 +11,13 @@ class Bird implements Model, KeyBindings {
 
     private static final int WIDTH = 25;
     private static final int HEIGHT = 25;
-    private static final double GRAVITY = 0.2;
+    private static final double MAX_SPEED = 15;
+    private static final double GRAVITY = 0.75;
+    private static final double LIFT = 25;
 
     private double x = 50;
     private double y = (WINDOW_HEIGHT / 3.0) - HEIGHT;
     private double velocity = 0;
-    private boolean hasCrashed = false;
 
 
     @Override
@@ -28,23 +29,24 @@ class Bird implements Model, KeyBindings {
 
     @Override
     public void update() {
-        if (hasCrashed) {
-            return;
-        }
-
-        velocity += GRAVITY;
+        setVelocity(velocity + GRAVITY);
         var newY = y + velocity;
 
-        if (isWithinBounds(newY)) {
+        if (isWithinTopBounds(newY) && isWithinBottomBounds(newY)) {
             y = newY;
-        } else {
-            hasCrashed = true;
+        } else if (!isWithinTopBounds(newY)) {
+            y = 0;
+        } else if (!isWithinBottomBounds(newY)) {
             y = WINDOW_HEIGHT - HEIGHT;
         }
     }
 
-    private boolean isWithinBounds(double y) {
-        return y >= 0 && y <= WINDOW_HEIGHT - HEIGHT;
+    private boolean isWithinTopBounds(double y) {
+        return y >= 0;
+    }
+
+    private boolean isWithinBottomBounds(double y) {
+        return y <= WINDOW_HEIGHT - HEIGHT;
     }
 
 
@@ -54,6 +56,15 @@ class Bird implements Model, KeyBindings {
     }
 
     private void jump() {
-        System.out.println("JUMP");
+        setVelocity(velocity - LIFT);
+    }
+
+
+    private void setVelocity(double newVelocity) {
+        velocity = clamp(newVelocity, -MAX_SPEED, MAX_SPEED);
+    }
+
+    private double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
     }
 }
