@@ -9,14 +9,17 @@ class Panel extends JPanel {
     static final int WINDOW_HEIGHT = 667;
 
     private Bird bird;
+    private Pipes pipes;
 
 
-    Panel(Bird bird) {
+    Panel(Bird bird, Pipes pipes) {
         super(true);
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
         this.bird = bird;
         this.bird.getKeyBindings().forEach(this::registerKeyBinding);
+
+        this.pipes = pipes;
     }
 
 
@@ -38,6 +41,9 @@ class Panel extends JPanel {
 
         bird.update();
         bird.paint(g);
+
+        pipes.update();
+        pipes.paint(g);
     }
 
 }

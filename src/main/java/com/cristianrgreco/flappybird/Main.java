@@ -9,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             var bird = new Bird();
-            var panel = new Panel(bird);
+            var pipes = new Pipes();
+            var panel = new Panel(bird, pipes);
             var window = new Window();
 
             window.add(panel);
