@@ -22,6 +22,7 @@ class Pipe implements Paintable, Collidable {
 
     @Override
     public void paint(Graphics2D g) {
+        g.setColor(Color.RED);
         getShapes().forEach(g::fill);
     }
 
