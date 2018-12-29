@@ -6,13 +6,13 @@ import java.awt.*;
 import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
 import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
 
-class Panel extends JPanel {
+class View extends JPanel {
 
     private Bird bird;
     private Pipes pipes;
 
 
-    Panel(Bird bird, Pipes pipes) {
+    View(Bird bird, Pipes pipes) {
         super(true);
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
@@ -44,6 +44,10 @@ class Panel extends JPanel {
 
         pipes.update();
         pipes.paint(g);
+
+        if (pipes.hasCollided(bird)) {
+            System.out.println("GAME OVER");
+        }
     }
 
 }

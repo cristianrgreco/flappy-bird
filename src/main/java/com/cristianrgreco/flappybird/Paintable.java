@@ -2,7 +2,7 @@ package com.cristianrgreco.flappybird;
 
 import java.awt.*;
 
-interface Model {
+interface Paintable {
 
     void paint(Graphics2D g);
 

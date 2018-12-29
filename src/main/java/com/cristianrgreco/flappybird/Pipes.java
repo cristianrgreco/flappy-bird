@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class Pipes implements Model {
+class Pipes implements Paintable {
 
     private static final int RESPAWN_RATE = 120;
 
@@ -41,6 +41,11 @@ class Pipes implements Model {
 
     private boolean shouldAddPipe() {
         return frameCount % RESPAWN_RATE == 0;
+    }
+
+
+    boolean hasCollided(Collidable collidable) {
+        return pipes.stream().anyMatch(pipe -> pipe.hasCollided(collidable));
     }
 
 }

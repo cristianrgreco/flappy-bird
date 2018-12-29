@@ -10,10 +10,10 @@ public class Main {
         EventQueue.invokeLater(() -> {
             var bird = new Bird();
             var pipes = new Pipes();
-            var panel = new Panel(bird, pipes);
+            var view = new View(bird, pipes);
             var window = new Window();
 
-            window.add(panel);
+            window.add(view);
             window.display();
 
             new GameLoop(window, newScheduledThreadPool(10)).start();

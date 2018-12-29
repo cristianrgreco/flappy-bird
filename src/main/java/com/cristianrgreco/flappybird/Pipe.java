@@ -2,12 +2,14 @@ package com.cristianrgreco.flappybird;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
 import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
 
-class Pipe implements Model {
+class Pipe implements Paintable, Collidable {
 
     private static final int WIDTH = 50;
     private static final int HEIGHT = 250;
@@ -20,13 +22,21 @@ class Pipe implements Model {
 
     @Override
     public void paint(Graphics2D g) {
-        g.fill(new Rectangle2D.Double(x, y, WIDTH, HEIGHT + offset));
-        g.fill(new Rectangle2D.Double(x, WINDOW_HEIGHT - HEIGHT + offset, WIDTH, HEIGHT - offset));
+        getShapes().forEach(g::fill);
     }
 
     @Override
     public void update() {
         x -= SPEED;
+    }
+
+
+    @Override
+    public Collection<Shape> getShapes() {
+        return List.of(
+                new Rectangle2D.Double(x, y, WIDTH, HEIGHT + offset),
+                new Rectangle2D.Double(x, WINDOW_HEIGHT - HEIGHT + offset, WIDTH, HEIGHT - offset)
+        );
     }
 
 

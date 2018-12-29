@@ -2,12 +2,13 @@ package com.cristianrgreco.flappybird;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.util.Collection;
 import java.util.List;
 
 import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
 import static javax.swing.KeyStroke.getKeyStroke;
 
-class Bird implements Model, KeyBindings {
+class Bird implements Paintable, Collidable, KeyBindings {
 
     private static final int WIDTH = 25;
     private static final int HEIGHT = 25;
@@ -23,30 +24,19 @@ class Bird implements Model, KeyBindings {
     @Override
     public void paint(Graphics2D g) {
         g.setColor(Color.RED);
-        g.fill(new Ellipse2D.Double(x, y, WIDTH, HEIGHT));
+        getShapes().forEach(g::fill);
     }
-
 
     @Override
     public void update() {
         setVelocity(velocity + GRAVITY);
-        var newY = y + velocity;
-
-        if (isWithinTopBounds(newY) && isWithinBottomBounds(newY)) {
-            y = newY;
-        } else if (!isWithinTopBounds(newY)) {
-            y = 0;
-        } else if (!isWithinBottomBounds(newY)) {
-            y = WINDOW_HEIGHT - HEIGHT;
-        }
+        y += velocity;
     }
 
-    private boolean isWithinTopBounds(double y) {
-        return y >= 0;
-    }
 
-    private boolean isWithinBottomBounds(double y) {
-        return y <= WINDOW_HEIGHT - HEIGHT;
+    @Override
+    public Collection<Shape> getShapes() {
+        return List.of(new Ellipse2D.Double(x, y, WIDTH, HEIGHT));
     }
 
 
@@ -67,4 +57,5 @@ class Bird implements Model, KeyBindings {
     private double clamp(double value, double min, double max) {
         return Math.max(min, Math.min(max, value));
     }
+
 }
