@@ -1,7 +1,7 @@
 package com.cristianrgreco.flappybird;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.Ellipse2D;
 import java.util.List;
 
 import static com.cristianrgreco.flappybird.Panel.WINDOW_HEIGHT;
@@ -23,7 +23,7 @@ class Bird implements Model, KeyBindings {
     @Override
     public void paint(Graphics2D g) {
         g.setColor(Color.RED);
-        g.fill(new Rectangle2D.Double(x, y, WIDTH, HEIGHT));
+        g.fill(new Ellipse2D.Double(x, y, WIDTH, HEIGHT));
     }
 
 
