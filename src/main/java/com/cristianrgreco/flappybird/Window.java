@@ -8,6 +8,10 @@ class Window extends JFrame {
     static final int WINDOW_HEIGHT = 667;
 
 
+    void setView(View view) {
+        add(view);
+    }
+
     void display() {
         pack();
         setTitle("Flappy Bird");

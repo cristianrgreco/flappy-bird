@@ -5,7 +5,7 @@ import java.awt.*;
 import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
 import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
 
-class GameView extends AbstractView {
+class GameView extends View {
 
     private Bird bird;
     private Pipes pipes;

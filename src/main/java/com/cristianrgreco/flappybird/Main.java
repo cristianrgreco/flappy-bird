@@ -13,7 +13,7 @@ public class Main {
             var gameView = new GameView(bird, pipes);
             var window = new Window();
 
-            window.add(gameView);
+            window.setView(gameView);
             window.display();
 
             new GameLoop(window, newScheduledThreadPool(10)).start();
