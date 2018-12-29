@@ -16,7 +16,7 @@ public class Main {
             window.setView(gameView);
             window.display();
 
-            new GameLoop(window, newScheduledThreadPool(10)).start();
+            new GameLoop(window, newScheduledThreadPool(1)).start();
         });
     }
 
