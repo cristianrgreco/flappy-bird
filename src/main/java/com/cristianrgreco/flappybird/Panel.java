@@ -16,10 +16,13 @@ class Panel extends JPanel {
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 
         this.bird = bird;
-        this.bird.getKeyBindings().forEach(keyBinding -> {
-            getInputMap().put(keyBinding.getKeyStroke(), keyBinding.getActionName());
-            getActionMap().put(keyBinding.getActionName(), keyBinding.getAction());
-        });
+        this.bird.getKeyBindings().forEach(this::registerKeyBinding);
+    }
+
+
+    private void registerKeyBinding(KeyBinding keyBinding) {
+        getInputMap().put(keyBinding.getKeyStroke(), keyBinding.getActionName());
+        getActionMap().put(keyBinding.getActionName(), keyBinding.getAction());
     }
 
 
