@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.cristianrgreco.flappybird.Bird.HEIGHT;
 import static com.cristianrgreco.flappybird.Scale.scale;
 import static com.cristianrgreco.flappybird.View.WINDOW_HEIGHT;
 import static com.cristianrgreco.flappybird.View.WINDOW_WIDTH;
@@ -15,8 +14,8 @@ import static com.cristianrgreco.flappybird.View.WINDOW_WIDTH;
 class Pipe implements Paintable, Collidable {
 
     private static final double SPEED = scale(1);
-    private static final int OFFSET = scale(64);
-    private static final int GAP = (HEIGHT * 3);
+    private static final int OFFSET = scale(70);
+    private static final int GAP = scale(32);
 
     private final ImageResource obstacleTopImage;
     private final ImageResource obstacleBottomImage;

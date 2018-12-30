@@ -13,12 +13,11 @@ import static javax.swing.KeyStroke.getKeyStroke;
 
 class Bird implements Paintable, Collidable, KeyBindings {
 
-    static final int HEIGHT = scale(12);
-    static final int WIDTH = scale(17);
-
-    private static final double GRAVITY = scale(0.175);
-    private static final double MAX_SPEED = scale(4);
-    private static final double LIFT = HEIGHT / 2.0;
+    private static final int HEIGHT = scale(12);
+    private static final int WIDTH = scale(17);
+    private static final double GRAVITY = scale(0.16);
+    private static final double MAX_SPEED = scale(3.5);
+    private static final double LIFT = scale(5);
 
     private final ImageResource birdImage;
 
