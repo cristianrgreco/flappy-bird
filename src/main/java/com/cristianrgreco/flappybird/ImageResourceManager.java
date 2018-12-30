@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-class ImageResourceManager implements ResourceManager<ImageResource> {
+import static com.cristianrgreco.flappybird.Scale.scale;
 
-    private static final int SCALE_FACTOR = 2;
+class ImageResourceManager implements ResourceManager<ImageResource> {
 
     private final Map<String, ImageResource> cache = new HashMap<>();
 
@@ -17,8 +17,8 @@ class ImageResourceManager implements ResourceManager<ImageResource> {
     public ImageResource getResource(String resourceName) {
         return cache.computeIfAbsent(resourceName, cacheKey -> {
             var image = readImage("/images/" + cacheKey);
-            var width = image.getWidth() * SCALE_FACTOR;
-            var height = image.getHeight() * SCALE_FACTOR;
+            var width = scale(image.getWidth());
+            var height = scale(image.getHeight());
             return new ImageResource(image, width, height);
         });
     }

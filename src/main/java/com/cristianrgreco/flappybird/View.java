@@ -3,10 +3,13 @@ package com.cristianrgreco.flappybird;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
-import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
+import static com.cristianrgreco.flappybird.Scale.scale;
 
 abstract class View extends JPanel implements KeyBindingSupport {
+
+    static final int WINDOW_WIDTH = scale(144);
+    static final int WINDOW_HEIGHT = scale(256);
+
 
     View() {
         super(true);

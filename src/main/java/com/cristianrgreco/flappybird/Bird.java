@@ -6,21 +6,25 @@ import java.awt.image.ImageObserver;
 import java.util.Collection;
 import java.util.List;
 
-import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
+import static com.cristianrgreco.flappybird.Scale.scale;
+import static com.cristianrgreco.flappybird.View.WINDOW_HEIGHT;
+import static com.cristianrgreco.flappybird.View.WINDOW_WIDTH;
 import static javax.swing.KeyStroke.getKeyStroke;
 
 class Bird implements Paintable, Collidable, KeyBindings {
 
-    private static final double MAX_SPEED = 8;
-    private static final double GRAVITY = 0.36;
-    private static final double LIFT = 12; // bird height / 2
+    static final int HEIGHT = scale(12);
+    static final int WIDTH = scale(17);
+
+    private static final double GRAVITY = scale(0.175);
+    private static final double MAX_SPEED = scale(4);
+    private static final double LIFT = HEIGHT / 2.0;
 
     private final ImageResource birdImage;
 
-    private double x = 50;
-    private double y = (WINDOW_HEIGHT / 2.0);
+    private double x = WINDOW_WIDTH / 2.0 - WIDTH;
+    private double y = WINDOW_HEIGHT / 2.0 - HEIGHT;
     private double velocity = 0;
-    private double rotation = Math.toRadians(-45);
 
 
     Bird(ImageResourceManager imageResourceManager) {
@@ -30,10 +34,7 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     @Override
     public void paint(Graphics2D g, ImageObserver imageObserver) {
-        var oldTransform = g.getTransform();
-        g.rotate(rotation, x, y);
         birdImage.paint(g, x, y, imageObserver);
-        g.setTransform(oldTransform);
     }
 
     @Override
