@@ -1,21 +1,11 @@
 package com.cristianrgreco.flappybird;
 
-import javax.swing.*;
+interface Window {
 
-class Window extends JFrame {
+    void setView(View view);
 
-    void setView(View view) {
-        add(view);
-    }
+    void repaint();
 
-
-    void display() {
-        pack();
-        setTitle("Flappy Bird");
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
+    void display();
 
 }
