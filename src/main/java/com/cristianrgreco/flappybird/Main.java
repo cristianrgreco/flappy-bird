@@ -8,11 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-            var bird = new Bird();
-            var pipes = new Pipes();
-            var gameView = new GameView(bird, pipes);
-            var window = new Window();
+            var imageResourceManager = new ImageResourceManager();
 
+            var bird = new Bird(imageResourceManager);
+            var pipes = new Pipes(imageResourceManager);
+            var gameView = new GameView(bird, pipes, imageResourceManager);
+
+            var window = new Window();
             window.setView(gameView);
             window.display();
 

@@ -2,32 +2,30 @@ package com.cristianrgreco.flappybird;
 
 import java.awt.*;
 
-import static com.cristianrgreco.flappybird.Window.WINDOW_HEIGHT;
-import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
-
 class GameView extends View {
 
-    private Bird bird;
-    private Pipes pipes;
+    private final Bird bird;
+    private final Pipes pipes;
+    private final ImageResource backgroundImage;
 
 
-    GameView(Bird bird, Pipes pipes) {
+    GameView(Bird bird, Pipes pipes, ImageResourceManager imageResourceManager) {
         this.bird = bird;
         this.bird.getKeyBindings().forEach(this::registerKeyBinding);
         this.pipes = pipes;
+        this.backgroundImage = imageResourceManager.getResource("background.png");
     }
 
 
     @Override
     public void render(Graphics2D g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        backgroundImage.paint(g, 0, 0, this);
 
         bird.update();
-        bird.paint(g);
+        bird.paint(g, this);
 
         pipes.update();
-        pipes.paint(g);
+        pipes.paint(g, this);
 
         if (pipes.hasCollided(bird)) {
             System.out.println("GAME OVER");

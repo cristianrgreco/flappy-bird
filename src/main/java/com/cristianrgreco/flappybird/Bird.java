@@ -2,6 +2,7 @@ package com.cristianrgreco.flappybird;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.ImageObserver;
 import java.util.Collection;
 import java.util.List;
 
@@ -10,21 +11,25 @@ import static javax.swing.KeyStroke.getKeyStroke;
 
 class Bird implements Paintable, Collidable, KeyBindings {
 
-    private static final int WIDTH = 25;
-    private static final int HEIGHT = 25;
     private static final double MAX_SPEED = 15;
     private static final double GRAVITY = 0.75;
     private static final double LIFT = 25;
 
+    private final ImageResource birdImage;
+
     private double x = 50;
-    private double y = (WINDOW_HEIGHT / 3.0) - HEIGHT;
+    private double y = (WINDOW_HEIGHT / 2.0);
     private double velocity = 0;
 
 
+    Bird(ImageResourceManager imageResourceManager) {
+        birdImage = imageResourceManager.getResource("bird-1.png");
+    }
+
+
     @Override
-    public void paint(Graphics2D g) {
-        g.setColor(Color.RED);
-        getShapes().forEach(g::fill);
+    public void paint(Graphics2D g, ImageObserver imageObserver) {
+        birdImage.paint(g, x, y, imageObserver);
     }
 
     @Override
@@ -36,7 +41,7 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     @Override
     public Collection<Shape> getShapes() {
-        return List.of(new Ellipse2D.Double(x, y, WIDTH, HEIGHT));
+        return List.of(new Ellipse2D.Double(x, y, birdImage.getWidth(), birdImage.getHeight()));
     }
 
 
