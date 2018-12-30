@@ -2,6 +2,7 @@ package com.cristianrgreco.flappybird;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 import static com.cristianrgreco.flappybird.Scale.scale;
 
@@ -11,16 +12,16 @@ abstract class View extends JPanel implements KeyBindingSupport {
     static final int WINDOW_HEIGHT = scale(256);
 
 
-    View() {
+    View(KeyBindings... keyBindings) {
         super(true);
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        registerKeyBindings(keyBindings);
     }
 
-
-    @Override
-    public void registerKeyBinding(KeyBinding keyBinding) {
-        getInputMap().put(keyBinding.getKeyStroke(), keyBinding.getActionName());
-        getActionMap().put(keyBinding.getActionName(), keyBinding.getAction());
+    private void registerKeyBindings(KeyBindings[] keyBindings) {
+        Arrays.stream(keyBindings).forEach(keyBinding ->
+                keyBinding.getKeyBindings().forEach(aKeyBinding ->
+                        registerKeyBinding(aKeyBinding, getInputMap(), getActionMap())));
     }
 
 

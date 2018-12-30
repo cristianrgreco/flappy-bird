@@ -10,8 +10,8 @@ class GameView extends View {
 
 
     GameView(Bird bird, Pipes pipes, ImageResourceManager imageResourceManager) {
+        super(bird);
         this.bird = bird;
-        this.bird.getKeyBindings().forEach(this::registerKeyBinding);
         this.pipes = pipes;
         this.backgroundImage = imageResourceManager.getResource("background.png");
     }
