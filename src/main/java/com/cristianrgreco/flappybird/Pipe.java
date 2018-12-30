@@ -12,8 +12,8 @@ import static com.cristianrgreco.flappybird.Window.WINDOW_WIDTH;
 
 class Pipe implements Paintable, Collidable {
 
-    private static final int GAP = 75;
-    private static final double SPEED = 2;
+    private static final int GAP = 65;
+    private static final double SPEED = 1.75;
 
     private final ImageResource obstacleTopImage;
     private final ImageResource obstacleBottomImage;

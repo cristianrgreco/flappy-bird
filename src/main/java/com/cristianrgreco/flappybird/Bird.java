@@ -11,9 +11,9 @@ import static javax.swing.KeyStroke.getKeyStroke;
 
 class Bird implements Paintable, Collidable, KeyBindings {
 
-    private static final double MAX_SPEED = 15;
-    private static final double GRAVITY = 0.75;
-    private static final double LIFT = 25;
+    private static final double MAX_SPEED = 8;
+    private static final double GRAVITY = 0.4;
+    private static final double LIFT = 12;
 
     private final ImageResource birdImage;
 

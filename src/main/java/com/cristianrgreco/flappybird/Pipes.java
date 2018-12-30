@@ -7,7 +7,7 @@ import java.util.List;
 
 class Pipes implements Paintable {
 
-    private static final int RESPAWN_RATE = 120;
+    private static final int RESPAWN_RATE = 100;
 
     private final List<Pipe> pipes = new ArrayList<>();
     private final ImageResourceManager imageResourceManager;
