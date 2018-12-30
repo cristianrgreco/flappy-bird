@@ -47,9 +47,10 @@ class Pipe implements Paintable, Collidable {
 
     @Override
     public Collection<Shape> getShapes() {
-        var obstacleTop = new Rectangle2D.Double(x, obstacleTopY(), obstacleWidth, obstacleTopHeight());
-        var obstacleBottom = new Rectangle2D.Double(x, obstacleBottomY(), obstacleWidth, obstacleBottomHeight());
-        return List.of(obstacleTop, obstacleBottom);
+        return List.of(
+                new Rectangle2D.Double(x, obstacleTopY(), obstacleWidth, obstacleTopHeight()),
+                new Rectangle2D.Double(x, obstacleBottomY(), obstacleWidth, obstacleBottomHeight())
+        );
     }
 
 
