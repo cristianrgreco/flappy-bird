@@ -7,9 +7,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static com.cristianrgreco.flappybird.GameView.WINDOW_HEIGHT;
+import static com.cristianrgreco.flappybird.GameView.WINDOW_WIDTH;
 import static com.cristianrgreco.flappybird.Scale.scale;
-import static com.cristianrgreco.flappybird.View.WINDOW_HEIGHT;
-import static com.cristianrgreco.flappybird.View.WINDOW_WIDTH;
 
 class Pipe implements Paintable, Collidable {
 

@@ -6,19 +6,15 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 class JFrameWindow implements Window {
 
+    private final JFrame frame;
     private final String title;
-    private final JFrame frame = new JFrame();
 
 
     JFrameWindow(String title) {
+        this.frame = new JFrame();
         this.title = title;
     }
 
-
-    @Override
-    public void setView(View view) {
-        frame.add(view);
-    }
 
     @Override
     public void repaint() {
@@ -33,6 +29,11 @@ class JFrameWindow implements Window {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+
+    void setView(JPanelView view) {
+        frame.add(view.getPanel());
     }
 
 }

@@ -6,9 +6,9 @@ import java.awt.image.ImageObserver;
 import java.util.Collection;
 import java.util.List;
 
+import static com.cristianrgreco.flappybird.GameView.WINDOW_HEIGHT;
+import static com.cristianrgreco.flappybird.GameView.WINDOW_WIDTH;
 import static com.cristianrgreco.flappybird.Scale.scale;
-import static com.cristianrgreco.flappybird.View.WINDOW_HEIGHT;
-import static com.cristianrgreco.flappybird.View.WINDOW_WIDTH;
 import static javax.swing.KeyStroke.getKeyStroke;
 
 class Bird implements Paintable, Collidable, KeyBindings {
