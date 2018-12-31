@@ -23,7 +23,6 @@ class JFrameWindow implements Window {
 
     @Override
     public void display() {
-        frame.pack();
         frame.setTitle(title);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,7 +32,8 @@ class JFrameWindow implements Window {
 
 
     void setView(JPanelView view) {
-        frame.add(view.getPanel());
+        frame.getContentPane().add(view.getPanel());
+        frame.pack();
     }
 
 }
