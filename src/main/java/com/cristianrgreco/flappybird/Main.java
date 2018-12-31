@@ -11,8 +11,9 @@ public class Main {
             var imageResourceManager = new ImageResourceManager();
 
             var bird = new Bird(imageResourceManager);
+            var ground = new Ground(imageResourceManager);
             var pipes = new Pipes(imageResourceManager);
-            var gameView = new GameView(bird, pipes, imageResourceManager);
+            var gameView = new GameView(bird, ground, pipes, imageResourceManager);
 
             var window = new JFrameWindow("Flappy Bird");
             window.setView(gameView);

@@ -14,8 +14,8 @@ import static com.cristianrgreco.flappybird.Scale.scale;
 class Pipe implements Paintable, Collidable {
 
     private static final double SPEED = scale(1);
-    private static final int OFFSET = scale(70);
-    private static final int GAP = scale(32);
+    private static final int OFFSET = scale(60);
+    private static final int GROUND_HEIGHT = scale(55);
 
     private final ImageResource obstacleTopImage;
     private final ImageResource obstacleBottomImage;
@@ -57,11 +57,11 @@ class Pipe implements Paintable, Collidable {
 
 
     private double obstacleTopY() {
-        return y - GAP;
+        return y - GROUND_HEIGHT;
     }
 
     private double obstacleBottomY() {
-        return WINDOW_HEIGHT - obstacleHeight + GAP + offset;
+        return WINDOW_HEIGHT - obstacleHeight + offset;
     }
 
     private double obstacleTopHeight() {

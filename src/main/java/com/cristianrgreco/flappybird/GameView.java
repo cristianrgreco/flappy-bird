@@ -13,12 +13,14 @@ class GameView implements JPanelView {
     private final JPanel panel;
     private final Bird bird;
     private final Pipes pipes;
+    private final Ground ground;
     private final ImageResource backgroundImage;
 
 
-    GameView(Bird bird, Pipes pipes, ImageResourceManager imageResourceManager) {
+    GameView(Bird bird, Ground ground, Pipes pipes, ImageResourceManager imageResourceManager) {
         this.panel = createPanel();
         this.bird = bird;
+        this.ground = ground;
         this.pipes = pipes;
         this.backgroundImage = imageResourceManager.getResource("background.png");
         bird.getKeyBindings().forEach(this::registerKeyBinding);
@@ -38,6 +40,9 @@ class GameView implements JPanelView {
         if (pipes.hasCollided(bird)) {
             System.out.println("GAME OVER");
         }
+
+        ground.update();
+        ground.paint(g, panel);
     }
 
 
