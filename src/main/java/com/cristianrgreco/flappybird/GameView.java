@@ -1,16 +1,14 @@
 package com.cristianrgreco.flappybird;
 
-import javax.swing.*;
 import java.awt.*;
 
 import static com.cristianrgreco.flappybird.Scale.scale;
 
-class GameView implements JPanelView {
+class GameView extends AbstractJPanelView {
 
     static final int WINDOW_WIDTH = scale(144);
     static final int WINDOW_HEIGHT = scale(256);
 
-    private final JPanel panel;
     private final Bird bird;
     private final Pipes pipes;
     private final Ground ground;
@@ -18,12 +16,11 @@ class GameView implements JPanelView {
 
 
     GameView(Bird bird, Ground ground, Pipes pipes, ImageResourceManager imageResourceManager) {
-        this.panel = createPanel();
+        super(bird);
         this.bird = bird;
         this.ground = ground;
         this.pipes = pipes;
         this.backgroundImage = imageResourceManager.getResource("background.png");
-        bird.getKeyBindings().forEach(this::registerKeyBinding);
     }
 
 
@@ -43,12 +40,6 @@ class GameView implements JPanelView {
 
         ground.update();
         ground.paint(g, panel);
-    }
-
-
-    @Override
-    public JPanel getPanel() {
-        return panel;
     }
 
 }
