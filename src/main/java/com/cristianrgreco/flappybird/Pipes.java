@@ -70,7 +70,7 @@ class Pipes implements Paintable {
     private boolean hasScored(Bird bird, Pipe pipe) {
         return !scoredPipes.contains(pipe) && pipe.getShapes().stream().anyMatch(pipeShape ->
                 bird.getShapes().stream().anyMatch(birdShape ->
-                        birdShape.getBounds2D().getX() > pipeShape.getBounds2D().getX() + (pipe.getPipeWidth() / 2)));
+                        birdShape.getBounds2D().getX() > pipeShape.getBounds2D().getX() + (pipe.getWidth() / 2)));
     }
 
     boolean hasCollided() {

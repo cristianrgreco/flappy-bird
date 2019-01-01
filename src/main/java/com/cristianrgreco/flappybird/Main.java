@@ -20,8 +20,8 @@ public class Main {
 
 
     private static GameView createGameView(JFrameViewManager viewManager, ImageResourceManager imageResourceManager) {
-        var bird = new Bird(imageResourceManager);
         var ground = new Ground(imageResourceManager);
+        var bird = new Bird(ground, imageResourceManager);
         var pipes = new Pipes(bird, imageResourceManager);
         var score = new Score(imageResourceManager);
         var viewTransition = new ViewTransition(viewManager, () -> createEndGameView(viewManager, imageResourceManager));

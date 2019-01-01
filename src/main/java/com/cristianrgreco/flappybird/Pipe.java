@@ -17,10 +17,10 @@ class Pipe implements Paintable, Collidable {
     private static final int OFFSET = scale(60);
     private static final int GROUND_HEIGHT = scale(55);
 
-    private final ImageResource pipeTopImage;
-    private final ImageResource pipeBottomImage;
-    private final int pipeWidth;
-    private final int pipeHeight;
+    private final ImageResource topImage;
+    private final ImageResource bottomImage;
+    private final int width;
+    private final int height;
     private final double offset = ThreadLocalRandom.current().nextInt(-OFFSET, OFFSET);
 
     private double x = WINDOW_WIDTH;
@@ -28,17 +28,17 @@ class Pipe implements Paintable, Collidable {
 
 
     Pipe(ImageResourceManager imageResourceManager) {
-        pipeTopImage = imageResourceManager.getResource("obstacle-top.png");
-        pipeBottomImage = imageResourceManager.getResource("obstacle-bottom.png");
-        pipeWidth = pipeTopImage.getWidth();
-        pipeHeight = pipeTopImage.getHeight();
+        this.topImage = imageResourceManager.getResource("obstacle-top.png");
+        this.bottomImage = imageResourceManager.getResource("obstacle-bottom.png");
+        this.width = topImage.getWidth();
+        this.height = topImage.getHeight();
     }
 
 
     @Override
     public void paint(Graphics2D g, ImageObserver imageObserver) {
-        pipeTopImage.paint(g, x, pipeTopY(), pipeWidth, pipeTopHeight(), imageObserver);
-        pipeBottomImage.paint(g, x, pipeBottomY(), pipeWidth, pipeBottomHeight(), imageObserver);
+        topImage.paint(g, x, pipeTopY(), width, pipeTopHeight(), imageObserver);
+        bottomImage.paint(g, x, pipeBottomY(), width, pipeBottomHeight(), imageObserver);
     }
 
     @Override
@@ -50,8 +50,8 @@ class Pipe implements Paintable, Collidable {
     @Override
     public Collection<Shape> getShapes() {
         return List.of(
-                new Rectangle2D.Double(x, pipeTopY(), pipeWidth, pipeTopHeight()),
-                new Rectangle2D.Double(x, pipeBottomY(), pipeWidth, pipeBottomHeight())
+                new Rectangle2D.Double(x, pipeTopY(), width, pipeTopHeight()),
+                new Rectangle2D.Double(x, pipeBottomY(), width, pipeBottomHeight())
         );
     }
 
@@ -61,24 +61,24 @@ class Pipe implements Paintable, Collidable {
     }
 
     private double pipeBottomY() {
-        return WINDOW_HEIGHT - pipeHeight + offset;
+        return WINDOW_HEIGHT - height + offset;
     }
 
     private double pipeTopHeight() {
-        return pipeHeight + offset;
+        return height + offset;
     }
 
     private double pipeBottomHeight() {
-        return pipeHeight - offset;
+        return height - offset;
     }
 
 
-    int getPipeWidth() {
-        return pipeWidth;
+    int getWidth() {
+        return width;
     }
 
     boolean isWithinBounds() {
-        return x + pipeWidth >= 0;
+        return x + width >= 0;
     }
 
 }

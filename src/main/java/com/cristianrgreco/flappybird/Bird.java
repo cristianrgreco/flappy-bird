@@ -18,6 +18,7 @@ class Bird implements Paintable, Collidable, KeyBindings {
     private static final double MAX_SPEED = scale(3.5);
     private static final double LIFT = scale(5);
 
+    private final Ground ground;
     private final ImageResource birdImage;
 
     private double x = WINDOW_WIDTH / 2.0 - WIDTH;
@@ -25,8 +26,9 @@ class Bird implements Paintable, Collidable, KeyBindings {
     private double velocity = 0;
 
 
-    Bird(ImageResourceManager imageResourceManager) {
-        birdImage = imageResourceManager.getResource("bird-1.png");
+    Bird(Ground ground, ImageResourceManager imageResourceManager) {
+        this.ground = ground;
+        this.birdImage = imageResourceManager.getResource("bird-1.png");
     }
 
 
@@ -64,6 +66,11 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     private double clamp(double value, double min, double max) {
         return Math.max(min, Math.min(max, value));
+    }
+
+
+    boolean isWithinBounds() {
+        return y >= 0 && y + birdImage.getHeight() <= WINDOW_HEIGHT - ground.getHeight();
     }
 
 }

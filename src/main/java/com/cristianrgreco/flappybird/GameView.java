@@ -38,7 +38,7 @@ class GameView extends AbstractJPanelView {
         pipes.update();
         pipes.paint(g, panel);
 
-        if (pipes.hasCollided()) {
+        if (!bird.isWithinBounds() || pipes.hasCollided()) {
             viewTransition.transition();
         }
 

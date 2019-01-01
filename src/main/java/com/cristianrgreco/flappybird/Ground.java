@@ -37,4 +37,9 @@ class Ground implements Paintable {
         }
     }
 
+
+    int getHeight() {
+        return groundImage.getHeight();
+    }
+
 }
