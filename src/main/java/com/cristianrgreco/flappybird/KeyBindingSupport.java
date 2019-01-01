@@ -1,7 +1,9 @@
 package com.cristianrgreco.flappybird;
 
+import java.util.Collection;
+
 interface KeyBindingSupport {
 
-    void registerKeyBinding(KeyBinding keyBinding);
+    Collection<KeyBinding> getKeyBindings();
 
 }

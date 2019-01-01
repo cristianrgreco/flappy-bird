@@ -2,7 +2,10 @@ package com.cristianrgreco.flappybird;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import static com.cristianrgreco.flappybird.GameView.WINDOW_HEIGHT;
 import static com.cristianrgreco.flappybird.GameView.WINDOW_WIDTH;
@@ -11,11 +14,21 @@ abstract class AbstractJPanelView implements JPanelView {
 
     final JPanel panel;
 
+    private final List<KeyBinding> keyBindings = new ArrayList<>();
+
 
     AbstractJPanelView(KeyBindings... keyBindings) {
+        this();
+        Arrays.stream(keyBindings).forEach(keyBinding -> keyBinding.getKeyBindings().forEach(this.keyBindings::add));
+    }
+
+    AbstractJPanelView(KeyBinding... keyBindings) {
+        this();
+        this.keyBindings.addAll(Arrays.asList(keyBindings));
+    }
+
+    private AbstractJPanelView() {
         panel = createPanel();
-        Arrays.stream(keyBindings).forEach(keyBinding ->
-                keyBinding.getKeyBindings().forEach(this::registerKeyBinding));
     }
 
 
@@ -38,9 +51,8 @@ abstract class AbstractJPanelView implements JPanelView {
 
 
     @Override
-    public void registerKeyBinding(KeyBinding keyBinding) {
-        panel.getInputMap().put(keyBinding.getKeyStroke(), keyBinding.getActionName());
-        panel.getActionMap().put(keyBinding.getActionName(), keyBinding.getAction());
+    public Collection<KeyBinding> getKeyBindings() {
+        return keyBindings;
     }
 
 }

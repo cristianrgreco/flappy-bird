@@ -14,14 +14,16 @@ class GameView extends AbstractJPanelView {
     private final Ground ground;
     private final Score score;
     private final ImageResource backgroundImage;
+    private final ViewTransition viewTransition;
 
 
-    GameView(Bird bird, Ground ground, Pipes pipes, Score score, ImageResourceManager imageResourceManager) {
+    GameView(Bird bird, Ground ground, Pipes pipes, Score score, ViewTransition viewTransition, ImageResourceManager imageResourceManager) {
         super(bird);
         this.bird = bird;
         this.ground = ground;
         this.pipes = pipes;
         this.score = score;
+        this.viewTransition = viewTransition;
         this.backgroundImage = imageResourceManager.getResource("background.png");
     }
 
@@ -37,7 +39,7 @@ class GameView extends AbstractJPanelView {
         pipes.paint(g, panel);
 
         if (pipes.hasCollided()) {
-            System.out.println("GAME OVER");
+            viewTransition.transition();
         }
 
         score.setScore(pipes.getScore());

@@ -32,7 +32,9 @@ class JFrameWindow implements Window {
 
 
     void setView(JPanelView view) {
+        frame.getContentPane().removeAll();
         frame.getContentPane().add(view.getPanel());
+        frame.getContentPane().revalidate();
         frame.pack();
     }
 
