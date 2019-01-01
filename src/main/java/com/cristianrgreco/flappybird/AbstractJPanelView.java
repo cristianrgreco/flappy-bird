@@ -12,23 +12,17 @@ import static com.cristianrgreco.flappybird.GameView.WINDOW_WIDTH;
 
 abstract class AbstractJPanelView implements JPanelView {
 
-    final JPanel panel;
+    final JPanel panel = createPanel();
 
     private final List<KeyBinding> keyBindings = new ArrayList<>();
 
 
     AbstractJPanelView(KeyBindings... keyBindings) {
-        this();
         Arrays.stream(keyBindings).forEach(keyBinding -> keyBinding.getKeyBindings().forEach(this.keyBindings::add));
     }
 
     AbstractJPanelView(KeyBinding... keyBindings) {
-        this();
         this.keyBindings.addAll(Arrays.asList(keyBindings));
-    }
-
-    private AbstractJPanelView() {
-        panel = createPanel();
     }
 
 

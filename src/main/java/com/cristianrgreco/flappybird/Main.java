@@ -24,17 +24,17 @@ public class Main {
         var ground = new Ground(imageResourceManager);
         var pipes = new Pipes(bird, imageResourceManager);
         var score = new Score(imageResourceManager);
-        var viewTransition = new ViewTransition(viewManager, createEndGameView(viewManager, imageResourceManager));
+        var viewTransition = new ViewTransition(viewManager, () -> createEndGameView(viewManager, imageResourceManager));
         return new GameView(bird, ground, pipes, score, viewTransition, imageResourceManager);
     }
 
     private static StartGameView createStartGameView(JFrameViewManager viewManager, ImageResourceManager imageResourceManager) {
-        var viewTransition = new ViewTransition(viewManager, createGameView(viewManager, imageResourceManager));
+        var viewTransition = new ViewTransition(viewManager, () -> createGameView(viewManager, imageResourceManager));
         return new StartGameView(viewTransition);
     }
 
     private static EndGameView createEndGameView(JFrameViewManager viewManager, ImageResourceManager imageResourceManager) {
-        var viewTransition = new ViewTransition(viewManager, createGameView(viewManager, imageResourceManager));
+        var viewTransition = new ViewTransition(viewManager, () -> createGameView(viewManager, imageResourceManager));
         return new EndGameView(viewTransition);
     }
 

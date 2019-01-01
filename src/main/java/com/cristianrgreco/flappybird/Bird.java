@@ -37,10 +37,6 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     @Override
     public void update() {
-        fall();
-    }
-
-    private void fall() {
         setVelocity(velocity + GRAVITY);
         y += velocity;
     }

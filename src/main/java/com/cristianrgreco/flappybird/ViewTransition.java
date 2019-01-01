@@ -1,19 +1,21 @@
 package com.cristianrgreco.flappybird;
 
+import java.util.function.Supplier;
+
 class ViewTransition {
 
     private final JFrameViewManager viewManager;
-    private final JPanelView view;
+    private final Supplier<JPanelView> viewSupplier;
 
 
-    ViewTransition(JFrameViewManager viewManager, JPanelView view) {
+    ViewTransition(JFrameViewManager viewManager, Supplier<JPanelView> viewSupplier) {
         this.viewManager = viewManager;
-        this.view = view;
+        this.viewSupplier = viewSupplier;
     }
 
 
     void transition() {
-        viewManager.setView(view);
+        viewManager.setView(viewSupplier.get());
     }
 
 }

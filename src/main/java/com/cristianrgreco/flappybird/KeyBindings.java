@@ -1,6 +1,6 @@
 package com.cristianrgreco.flappybird;
 
-public interface KeyBindings {
+interface KeyBindings {
 
     Iterable<KeyBinding> getKeyBindings();
 
