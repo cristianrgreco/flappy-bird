@@ -1,6 +1,7 @@
 package com.cristianrgreco.flappybird;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 class ImageResource {
@@ -31,6 +32,34 @@ class ImageResource {
 
     private void paint(Graphics2D g, int x, int y, int width, int height, ImageObserver imageObserver) {
         g.drawImage(image, x, y, width, height, imageObserver);
+    }
+
+
+    static ImageResource compose(Iterable<ImageResource> imageResources) {
+        var imageSize = calculateCompositionSize(imageResources);
+        var bufferedImage = new BufferedImage(imageSize.width, imageSize.height, BufferedImage.TYPE_INT_ARGB);
+
+        var g2d = (Graphics2D) bufferedImage.getGraphics();
+        var xOffset = 0;
+        for (var imageResource : imageResources) {
+            imageResource.paint(g2d, xOffset, 0, null);
+            xOffset += imageResource.getWidth();
+        }
+        g2d.dispose();
+
+        return new ImageResource(bufferedImage, bufferedImage.getWidth(), bufferedImage.getHeight());
+    }
+
+    private static Dimension calculateCompositionSize(Iterable<ImageResource> imageResources) {
+        var width = 0;
+        var height = 0;
+
+        for (var imageResource : imageResources) {
+            width += imageResource.getWidth();
+            height = Math.max(height, imageResource.getHeight());
+        }
+
+        return new Dimension(width, height);
     }
 
 

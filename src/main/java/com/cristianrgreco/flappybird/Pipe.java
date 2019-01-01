@@ -17,10 +17,10 @@ class Pipe implements Paintable, Collidable {
     private static final int OFFSET = scale(60);
     private static final int GROUND_HEIGHT = scale(55);
 
-    private final ImageResource obstacleTopImage;
-    private final ImageResource obstacleBottomImage;
-    private final int obstacleWidth;
-    private final int obstacleHeight;
+    private final ImageResource pipeTopImage;
+    private final ImageResource pipeBottomImage;
+    private final int pipeWidth;
+    private final int pipeHeight;
     private final double offset = ThreadLocalRandom.current().nextInt(-OFFSET, OFFSET);
 
     private double x = WINDOW_WIDTH;
@@ -28,17 +28,17 @@ class Pipe implements Paintable, Collidable {
 
 
     Pipe(ImageResourceManager imageResourceManager) {
-        obstacleTopImage = imageResourceManager.getResource("obstacle-top.png");
-        obstacleBottomImage = imageResourceManager.getResource("obstacle-bottom.png");
-        obstacleWidth = obstacleTopImage.getWidth();
-        obstacleHeight = obstacleTopImage.getHeight();
+        pipeTopImage = imageResourceManager.getResource("obstacle-top.png");
+        pipeBottomImage = imageResourceManager.getResource("obstacle-bottom.png");
+        pipeWidth = pipeTopImage.getWidth();
+        pipeHeight = pipeTopImage.getHeight();
     }
 
 
     @Override
     public void paint(Graphics2D g, ImageObserver imageObserver) {
-        obstacleTopImage.paint(g, x, obstacleTopY(), obstacleWidth, obstacleTopHeight(), imageObserver);
-        obstacleBottomImage.paint(g, x, obstacleBottomY(), obstacleWidth, obstacleBottomHeight(), imageObserver);
+        pipeTopImage.paint(g, x, pipeTopY(), pipeWidth, pipeTopHeight(), imageObserver);
+        pipeBottomImage.paint(g, x, pipeBottomY(), pipeWidth, pipeBottomHeight(), imageObserver);
     }
 
     @Override
@@ -50,31 +50,35 @@ class Pipe implements Paintable, Collidable {
     @Override
     public Collection<Shape> getShapes() {
         return List.of(
-                new Rectangle2D.Double(x, obstacleTopY(), obstacleWidth, obstacleTopHeight()),
-                new Rectangle2D.Double(x, obstacleBottomY(), obstacleWidth, obstacleBottomHeight())
+                new Rectangle2D.Double(x, pipeTopY(), pipeWidth, pipeTopHeight()),
+                new Rectangle2D.Double(x, pipeBottomY(), pipeWidth, pipeBottomHeight())
         );
     }
 
 
-    private double obstacleTopY() {
+    private double pipeTopY() {
         return y - GROUND_HEIGHT;
     }
 
-    private double obstacleBottomY() {
-        return WINDOW_HEIGHT - obstacleHeight + offset;
+    private double pipeBottomY() {
+        return WINDOW_HEIGHT - pipeHeight + offset;
     }
 
-    private double obstacleTopHeight() {
-        return obstacleHeight + offset;
+    private double pipeTopHeight() {
+        return pipeHeight + offset;
     }
 
-    private double obstacleBottomHeight() {
-        return obstacleHeight - offset;
+    private double pipeBottomHeight() {
+        return pipeHeight - offset;
     }
 
+
+    int getPipeWidth() {
+        return pipeWidth;
+    }
 
     boolean isWithinBounds() {
-        return x + obstacleWidth >= 0;
+        return x + pipeWidth >= 0;
     }
 
 }

@@ -3,19 +3,25 @@ package com.cristianrgreco.flappybird;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 class Pipes implements Paintable {
 
     private static final int RESPAWN_RATE = 90;
 
-    private final List<Pipe> pipes = new ArrayList<>();
+    private final Bird bird;
     private final ImageResourceManager imageResourceManager;
+    private final List<Pipe> pipes = new ArrayList<>();
+    private final Set<Pipe> scoredPipes = new HashSet<>();
 
+    private int score = 0;
     private long frameCount = 0;
 
 
-    Pipes(ImageResourceManager imageResourceManager) {
+    Pipes(Bird bird, ImageResourceManager imageResourceManager) {
+        this.bird = bird;
         this.imageResourceManager = imageResourceManager;
     }
 
@@ -42,6 +48,13 @@ class Pipes implements Paintable {
                 pipe.update();
             } else {
                 pipeIterator.remove();
+                scoredPipes.remove(pipe);
+                continue;
+            }
+
+            if (hasScored(bird, pipe)) {
+                scoredPipes.add(pipe);
+                score++;
             }
         }
     }
@@ -50,9 +63,18 @@ class Pipes implements Paintable {
         return frameCount % RESPAWN_RATE == 0;
     }
 
+    int getScore() {
+        return score;
+    }
 
-    boolean hasCollided(Collidable collidable) {
-        return pipes.stream().anyMatch(pipe -> pipe.hasCollided(collidable));
+    private boolean hasScored(Bird bird, Pipe pipe) {
+        return !scoredPipes.contains(pipe) && pipe.getShapes().stream().anyMatch(pipeShape ->
+                bird.getShapes().stream().anyMatch(birdShape ->
+                        birdShape.getBounds2D().getX() > pipeShape.getBounds2D().getX() + (pipe.getPipeWidth() / 2)));
+    }
+
+    boolean hasCollided() {
+        return pipes.stream().anyMatch(pipe -> pipe.hasCollided(bird));
     }
 
 }
