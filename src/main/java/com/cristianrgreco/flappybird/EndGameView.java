@@ -1,12 +1,11 @@
 package com.cristianrgreco.flappybird;
 
-import javax.swing.*;
 import java.awt.*;
 
 class EndGameView extends AbstractJPanelView {
 
     EndGameView(ViewTransition viewTransition) {
-        super(new KeyBinding(KeyStroke.getKeyStroke(' '), "RESTART", e -> viewTransition.transition()));
+        super(new KeyBinding(' ', "RESTART", e -> viewTransition.transition()));
     }
 
 

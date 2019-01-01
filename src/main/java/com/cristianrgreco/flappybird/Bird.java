@@ -9,7 +9,6 @@ import java.util.List;
 import static com.cristianrgreco.flappybird.GameView.WINDOW_HEIGHT;
 import static com.cristianrgreco.flappybird.GameView.WINDOW_WIDTH;
 import static com.cristianrgreco.flappybird.Scale.scale;
-import static javax.swing.KeyStroke.getKeyStroke;
 
 class Bird implements Paintable, Collidable, KeyBindings {
 
@@ -38,6 +37,10 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     @Override
     public void update() {
+        fall();
+    }
+
+    private void fall() {
         setVelocity(velocity + GRAVITY);
         y += velocity;
     }
@@ -51,7 +54,7 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     @Override
     public Iterable<KeyBinding> getKeyBindings() {
-        return List.of(new KeyBinding(getKeyStroke(' '), "JUMP", e -> jump()));
+        return List.of(new KeyBinding(' ', "JUMP", e -> jump()));
     }
 
     private void jump() {

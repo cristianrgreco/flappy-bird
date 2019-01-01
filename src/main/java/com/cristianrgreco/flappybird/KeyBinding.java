@@ -11,8 +11,8 @@ class KeyBinding {
     private final Action action;
 
 
-    KeyBinding(KeyStroke keyStroke, Object actionName, Consumer<ActionEvent> eventConsumer) {
-        this.keyStroke = keyStroke;
+    KeyBinding(char keyChar, Object actionName, Consumer<ActionEvent> eventConsumer) {
+        this.keyStroke = KeyStroke.getKeyStroke(keyChar);
         this.actionName = actionName;
         this.action = new ActionCreator(eventConsumer);
     }

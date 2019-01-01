@@ -1,12 +1,11 @@
 package com.cristianrgreco.flappybird;
 
-import javax.swing.*;
 import java.awt.*;
 
 class StartGameView extends AbstractJPanelView {
 
     StartGameView(ViewTransition viewTransition) {
-        super(new KeyBinding(KeyStroke.getKeyStroke(' '), "START", e -> viewTransition.transition()));
+        super(new KeyBinding(' ', "START", e -> viewTransition.transition()));
     }
 
 
