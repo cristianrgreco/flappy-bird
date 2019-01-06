@@ -1,7 +1,5 @@
 package com.cristianrgreco.flappybird;
 
-import java.awt.*;
-
 class StartGameView extends AbstractJPanelView {
 
     StartGameView(ViewTransition viewTransition) {
@@ -10,8 +8,8 @@ class StartGameView extends AbstractJPanelView {
 
 
     @Override
-    public void render(Graphics2D g) {
-        g.drawString("PRESS SPACE TO START", 0, 20);
+    public void render(Graphics graphics) {
+        graphics.run(g -> g.drawString("PRESS SPACE TO START", 0, 20));
     }
 
 }

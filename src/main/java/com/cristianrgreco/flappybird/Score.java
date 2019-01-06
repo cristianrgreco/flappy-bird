@@ -1,6 +1,5 @@
 package com.cristianrgreco.flappybird;
 
-import java.awt.*;
 import java.awt.image.ImageObserver;
 
 import static com.cristianrgreco.flappybird.GameView.WINDOW_WIDTH;
@@ -22,8 +21,8 @@ class Score implements Paintable {
 
 
     @Override
-    public void paint(Graphics2D g, ImageObserver imageObserver) {
-        scoreImage.paint(g, x, y, imageObserver);
+    public void paint(Graphics graphics, ImageObserver imageObserver) {
+        scoreImage.paint(graphics, x, y, imageObserver);
     }
 
     @Override

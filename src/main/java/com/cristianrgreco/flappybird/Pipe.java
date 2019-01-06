@@ -36,9 +36,9 @@ class Pipe implements Paintable, Collidable {
 
 
     @Override
-    public void paint(Graphics2D g, ImageObserver imageObserver) {
-        topImage.paint(g, x, pipeTopY(), width, pipeTopHeight(), imageObserver);
-        bottomImage.paint(g, x, pipeBottomY(), width, pipeBottomHeight(), imageObserver);
+    public void paint(Graphics graphics, ImageObserver imageObserver) {
+        topImage.paint(graphics, x, pipeTopY(), width, pipeTopHeight(), imageObserver);
+        bottomImage.paint(graphics, x, pipeBottomY(), width, pipeBottomHeight(), imageObserver);
     }
 
     @Override

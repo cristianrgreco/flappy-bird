@@ -1,6 +1,5 @@
 package com.cristianrgreco.flappybird;
 
-import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,8 +26,8 @@ class Pipes implements Paintable {
 
 
     @Override
-    public void paint(Graphics2D g, ImageObserver imageObserver) {
-        pipes.forEach(pipe -> pipe.paint(g, imageObserver));
+    public void paint(Graphics graphics, ImageObserver imageObserver) {
+        pipes.forEach(pipe -> pipe.paint(graphics, imageObserver));
     }
 
     @Override

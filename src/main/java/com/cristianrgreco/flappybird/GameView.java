@@ -1,7 +1,5 @@
 package com.cristianrgreco.flappybird;
 
-import java.awt.*;
-
 import static com.cristianrgreco.flappybird.Scale.scale;
 
 class GameView extends AbstractJPanelView {
@@ -29,14 +27,14 @@ class GameView extends AbstractJPanelView {
 
 
     @Override
-    public void render(Graphics2D g) {
-        backgroundImage.paint(g, 0, 0, panel);
+    public void render(Graphics graphics) {
+        backgroundImage.paint(graphics, 0, 0, panel);
 
         bird.update();
-        bird.paint(g, panel);
+        bird.paint(graphics, panel);
 
         pipes.update();
-        pipes.paint(g, panel);
+        pipes.paint(graphics, panel);
 
         if (!bird.isWithinBounds() || pipes.hasCollided()) {
             viewTransition.transition();
@@ -44,10 +42,10 @@ class GameView extends AbstractJPanelView {
 
         score.setScore(pipes.getScore());
         score.update();
-        score.paint(g, panel);
+        score.paint(graphics, panel);
 
         ground.update();
-        ground.paint(g, panel);
+        ground.paint(graphics, panel);
     }
 
 }

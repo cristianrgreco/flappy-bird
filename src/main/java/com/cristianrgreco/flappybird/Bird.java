@@ -44,11 +44,11 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
 
     @Override
-    public void paint(Graphics2D g, ImageObserver imageObserver) {
-        var gg = (Graphics2D) g.create();
-        gg.rotate(Math.toRadians(rotation), x + WIDTH / 2.0, y + HEIGHT / 2.0);
-        birdImage.paint(gg, x, y, imageObserver);
-        gg.dispose();
+    public void paint(Graphics graphics, ImageObserver imageObserver) {
+        graphics.run(g -> {
+            g.rotate(Math.toRadians(rotation), x + WIDTH / 2.0, y + HEIGHT / 2.0);
+            birdImage.paint(g, x, y, imageObserver);
+        });
     }
 
     @Override

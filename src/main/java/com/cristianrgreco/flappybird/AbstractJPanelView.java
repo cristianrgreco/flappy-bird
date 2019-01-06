@@ -34,9 +34,9 @@ abstract class AbstractJPanelView implements JPanelView {
     private JPanel createPanel() {
         var panel = new JPanel() {
             @Override
-            protected void paintComponent(Graphics g) {
+            protected void paintComponent(java.awt.Graphics g) {
                 super.paintComponent(g);
-                render((Graphics2D) g);
+                render(new Graphics((Graphics2D) g));
             }
         };
         panel.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));

@@ -1,7 +1,5 @@
 package com.cristianrgreco.flappybird;
 
-import java.awt.*;
-
 class EndGameView extends AbstractJPanelView {
 
     EndGameView(ViewTransition viewTransition) {
@@ -10,8 +8,8 @@ class EndGameView extends AbstractJPanelView {
 
 
     @Override
-    public void render(Graphics2D g) {
-        g.drawString("PRESS SPACE TO RESTART", 0, 20);
+    public void render(Graphics graphics) {
+        graphics.run(g -> g.drawString("PRESS SPACE TO RESTART", 0, 20));
     }
 
 }
