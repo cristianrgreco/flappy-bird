@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ResourceRotatorTest {
 
     @Test
-    void update_shouldReturnNextResource_whenTickCountIsMet() {
+    void getResource_shouldReturnNextResource_whenTickCountIsMet() {
         var tickCount = 1;
         var resources = List.of(
                 new ImageResource(null, 100, 100),
