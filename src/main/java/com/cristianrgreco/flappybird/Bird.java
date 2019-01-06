@@ -14,21 +14,28 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     private static final int HEIGHT = scale(12);
     private static final int WIDTH = scale(17);
+    private static final int FLAP_INTERVAL = 5;
     private static final double GRAVITY = scale(0.16);
     private static final double MAX_SPEED = scale(3.5);
     private static final double LIFT = scale(5);
 
     private final Ground ground;
-    private final ImageResource birdImage;
+    private final ResourceRotator<ImageResource> birdImageResourceRotator;
 
     private double x = WINDOW_WIDTH / 2.0 - WIDTH;
     private double y = WINDOW_HEIGHT / 2.0 - HEIGHT;
     private double velocity = 0;
 
+    private ImageResource birdImage;
+
 
     Bird(Ground ground, ImageResourceManager imageResourceManager) {
         this.ground = ground;
-        this.birdImage = imageResourceManager.getResource("bird-1.png");
+        this.birdImageResourceRotator = new ResourceRotator<>(FLAP_INTERVAL, List.of(
+                imageResourceManager.getResource("bird-0.png"),
+                imageResourceManager.getResource("bird-1.png"),
+                imageResourceManager.getResource("bird-2.png")
+        ));
     }
 
 
@@ -39,6 +46,9 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     @Override
     public void update() {
+        birdImageResourceRotator.tick();
+        birdImage = birdImageResourceRotator.getResource();
+
         setVelocity(velocity + GRAVITY);
         y += velocity;
     }
