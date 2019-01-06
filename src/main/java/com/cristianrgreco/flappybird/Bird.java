@@ -15,9 +15,12 @@ class Bird implements Paintable, Collidable, KeyBindings {
     private static final int HEIGHT = scale(12);
     private static final int WIDTH = scale(17);
     private static final int FLAP_INTERVAL = 5;
+    private static final int ROTATION_SPEED = 5;
     private static final double GRAVITY = scale(0.12);
     private static final double MAX_SPEED = scale(3);
     private static final double LIFT = scale(4);
+    private static final double MIN_ROTATION = -25;
+    private static final double MAX_ROTATION = 90;
 
     private final Ground ground;
     private final ResourceRotator<ImageResource> birdImageResourceRotator;
@@ -25,6 +28,7 @@ class Bird implements Paintable, Collidable, KeyBindings {
     private double x = WINDOW_WIDTH / 2.0 - WIDTH;
     private double y = WINDOW_HEIGHT / 2.0 - HEIGHT;
     private double velocity = 0;
+    private double rotation = MIN_ROTATION;
 
     private ImageResource birdImage;
 
@@ -41,7 +45,10 @@ class Bird implements Paintable, Collidable, KeyBindings {
 
     @Override
     public void paint(Graphics2D g, ImageObserver imageObserver) {
-        birdImage.paint(g, x, y, imageObserver);
+        var gg = (Graphics2D) g.create();
+        gg.rotate(Math.toRadians(rotation), x + WIDTH / 2.0, y + HEIGHT / 2.0);
+        birdImage.paint(gg, x, y, imageObserver);
+        gg.dispose();
     }
 
     @Override
@@ -49,8 +56,26 @@ class Bird implements Paintable, Collidable, KeyBindings {
         birdImageResourceRotator.tick();
         birdImage = birdImageResourceRotator.getResource();
 
+        setRotation();
+
         setVelocity(velocity + GRAVITY);
         y += velocity;
+    }
+
+    private void setRotation() {
+        if (velocity > 0) {
+            rotation = Math.min(MAX_ROTATION, rotation + ROTATION_SPEED);
+        } else {
+            rotation = MIN_ROTATION;
+        }
+    }
+
+    private void setVelocity(double newVelocity) {
+        velocity = clamp(newVelocity, -MAX_SPEED, MAX_SPEED);
+    }
+
+    private double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
     }
 
 
@@ -66,16 +91,8 @@ class Bird implements Paintable, Collidable, KeyBindings {
     }
 
     private void jump() {
+        rotation = MIN_ROTATION;
         setVelocity(velocity - LIFT);
-    }
-
-
-    private void setVelocity(double newVelocity) {
-        velocity = clamp(newVelocity, -MAX_SPEED, MAX_SPEED);
-    }
-
-    private double clamp(double value, double min, double max) {
-        return Math.max(min, Math.min(max, value));
     }
 
 
